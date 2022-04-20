@@ -6,6 +6,8 @@ describe("NFTMarket", function () {
     const NFT_MP_V1 = ethers.getContractFactory("NFT_marketplace_v1");
     const market_1 = await NFT_MP_V1.deployProxy(NFT_MP_V1);
 
+    await market_1.deployed();
+
     const priceNFT = ethers.utils.parseUnits("1", "ether");
 
     await market_1.createNFT("https://www.myNft.com", priceNFT); // idToken 1
@@ -14,7 +16,7 @@ describe("NFTMarket", function () {
 
   it("Should return right address after sell", async function () {
     const [buyerAddress] = await ethers.getSigners();
-    await market_1.connect(buyerAddress).createOrder(1, priceNFT);
+    await market_1.connect(buyerAddress).buyNFT(1, { value: priceNFT });
     expect(await market_1.getOwnerOfNFT(1)).to.equal(buyerAddress.address);
   });
 

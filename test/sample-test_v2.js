@@ -21,7 +21,9 @@ describe("NFTMarket", function () {
     const balanceBeforeBuy = await buyerAddress.getBalance();
 
     it("Should return right address after sell", async function () {
-      await upgreaded.connect(buyerAddress).createOrder(1, priceNFT);
+      await upgreaded
+        .connect(buyerAddress)
+        .buyNFT(1, { value: priceNFT + priceNFT / 400 });
       expect(await upgreaded.getOwnerOfNFT(1)).to.equal(buyerAddress.address);
     });
 
