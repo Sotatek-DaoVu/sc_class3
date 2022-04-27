@@ -23,18 +23,6 @@ contract NFT_marketplace_v1 is Initializable, OwnableUpgradeable {
         bool sold;
     }
 
-    // event
-
-    event changeTreasuryAddress(address from, address to);
-    event MarketItemCreated(
-        uint256 indexed tokenId,
-        address seller,
-        uint256 price,
-        bool sold
-    );
-
-    event ItemSold(address from, address to, uint256 tokenId, bool sold);
-
     // modifier
 
     modifier HasTransferApproval(uint256 tokenId) {
@@ -119,4 +107,16 @@ contract NFT_marketplace_v1 is Initializable, OwnableUpgradeable {
         payable(seller).transfer(msg.value);
         emit ItemSold(idMarketItem[tokenId].seller, msg.sender, tokenId, true);
     }
+
+    // event
+
+    event changeTreasuryAddress(address from, address to);
+    event MarketItemCreated(
+        uint256 indexed tokenId,
+        address seller,
+        uint256 price,
+        bool sold
+    );
+
+    event ItemSold(address from, address to, uint256 tokenId, bool sold);
 }

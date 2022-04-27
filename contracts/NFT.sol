@@ -13,14 +13,6 @@ contract NFT is Initializable, ERC721URIStorageUpgradeable, OwnableUpgradeable {
 
     address private marketAddress;
 
-    function getMarketplace() public view returns (address) {
-        return marketAddress;
-    }
-
-    function setMarketplace(address _marketAddress) public {
-        marketAddress = _marketAddress;
-    }
-
     function initialize() public initializer {
         __ERC721_init("SmartContract", "SC");
         __Ownable_init();
